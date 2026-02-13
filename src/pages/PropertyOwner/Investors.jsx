@@ -1,10 +1,13 @@
 import { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 import {
   Search,
   MoreVertical,
   User,
   ChevronDown,
 } from "lucide-react";
+
 
 
 /* ===============================
@@ -137,7 +140,7 @@ const investorData = [
 ================================ */
 
 export default function Investors() {
-
+   const navigate = useNavigate(); 
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState("");
   const [type, setType] = useState("");
@@ -299,7 +302,7 @@ export default function Investors() {
           {/* BODY */}
           {filtered.map((item) => (
 
-            <Row key={item.id} data={item} />
+            <Row key={item.id} data={item}  navigate={navigate} />
 
           ))}
 
@@ -342,7 +345,7 @@ export default function Investors() {
    ROW
 ================================ */
 
-function Row({ data }) {
+function Row({ data, navigate }) {
 
   const [open, setOpen] = useState(false);
   const ref = useRef();
@@ -436,48 +439,64 @@ function Row({ data }) {
 
 
       {/* ACTION */}
-      <div className="relative" ref={ref}>
+    <div className="relative" ref={ref}>
+      <button
+        onClick={() => setOpen(!open)}
+        className="
+          w-8 h-8
+          rounded-full
+          bg-white/10
+          hover:bg-white/20
+          flex justify-center items-center
+        "
+      >
+        <MoreVertical size={16} />
+      </button>
 
-        <button
-          onClick={() => setOpen(!open)}
+      {open && (
+        <div
           className="
-            w-8 h-8
-            rounded-full
-            bg-white/10
-            hover:bg-white/20
-            flex justify-center items-center
+            absolute right-10 top-0
+            w-[170px]
+            bg-[#3B4E73]
+            rounded-lg
+            border border-white/20
+            shadow-xl
+            overflow-hidden
+            z-50
           "
         >
-          <MoreVertical size={16} />
-        </button>
+
+          <MenuItem
+            text="Remove"
+            danger
+            onClick={() => {
+              setOpen(false);
+              console.log("Remove clicked");
+            }}
+          />
+
+          <MenuItem
+            text="View Profile"
+            onClick={() => {
+              setOpen(false);
+              navigate(`/investor/${data.id}`);
+            }}
+          />
+
+          <MenuItem
+            text="See Investment"
+            onClick={() => {
+              setOpen(false);
+              navigate(`/investment/${data.id}`);
+            }}
+          />
 
 
-        {open && (
+        </div>
+      )}
+</div>
 
-          <div
-            className="
-              absolute right-10 top-0
-              w-[160px]
-              bg-[#3B4E73]
-              rounded-lg
-              border border-white/20
-              shadow-xl
-              overflow-hidden
-              z-50
-            "
-          >
-
-            <MenuItem text="Remove" danger />
-
-            <MenuItem text="View Profile" />
-
-            <MenuItem text="See Investment" />
-
-          </div>
-
-        )}
-
-      </div>
 
     </div>
   );
@@ -557,20 +576,14 @@ function StatusBadge({ status }) {
 
 
 
-function MenuItem({ text, danger }) {
-
+function MenuItem({ text, danger, onClick }) {
   return (
     <button
+      onClick={onClick}
       className={`
-        w-full px-4 py-2 text-left text-sm
-        hover:bg-white/10
-        transition
-
-        ${
-          danger
-            ? "text-red-400"
-            : "text-white"
-        }
+        w-full text-left px-4 py-2 text-sm
+        hover:bg-white/10 transition
+        ${danger ? "text-red-400" : "text-white"}
       `}
     >
       {text}

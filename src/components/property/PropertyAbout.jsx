@@ -2,8 +2,7 @@ export default function PropertyAbout() {
   return (
     <div
       className="
-        w-full
-        max-w-[553px]
+        w-[590px]
         h-[206px]
         rounded-[15px]
         bg-[#1F3A5F]/10

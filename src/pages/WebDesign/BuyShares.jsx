@@ -32,23 +32,24 @@ export default function BuyShares() {
         <div className="max-w-[1280px] mx-auto px-6">
 
           {/* HEADER */}
-          <div className="mb-10">
-            <PropertyHeader mode="buy" />
-          </div>
+          {/* HEADER */}
+        <div className="mb-10">
+          <PropertyHeader mode="buy" />
+        </div>
 
-          {/* ABOUT + DETAILS */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* MAIN GRID */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-6 items-start">
 
+          <div className="flex flex-col gap-6">
             <PropertyAbout />
-
-            <PropertyDetails />
-
-          </div>
-
-          {/* IMAGES */}
-          <div className="mt-8">
             <PropertyImages />
           </div>
+
+          <div>
+            <PropertyDetails />
+          </div>
+
+        </div>
 
         </div>
       </main>

@@ -25,8 +25,7 @@ export default function PropertyDetails() {
   return (
     <div
       className="
-        w-[744px]
-        h-
+        w-[700px]
         rounded-[15px]
         bg-[#1F3A5F]/10
         backdrop-blur-sm

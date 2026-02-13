@@ -9,6 +9,7 @@ import Footer from "../../components/WebDesign/Footer";
 export default function SellShares() {
   return (
     <div className="relative min-h-screen overflow-hidden">
+
       {/* BACKGROUND IMAGE */}
       <div className="absolute inset-0 -z-10">
         <img
@@ -17,7 +18,7 @@ export default function SellShares() {
           className="w-full h-full object-cover"
         />
 
-        {/* FIGMA OVERLAY (MATCH BUY PAGE) */}
+        {/* OVERLAY */}
         <div className="absolute inset-0 bg-[#07182F]/55" />
       </div>
 
@@ -25,18 +26,33 @@ export default function SellShares() {
       <Navbar />
 
       {/* PAGE CONTENT */}
-      <div className="relative z-10 max-w-[1440px] mx-auto px-8">
-        <div className="mt-[140px] ml-[64px]">
-          <PropertyHeader mode="sell" />
-        </div>
+      <main className="relative z-10 pt pb-20">
 
-        <div className="grid grid-cols-[1.45fr_1fr] gap-6 mt-10">
-          <PropertyAbout />
-          <PropertyDetails />
-        </div>
+        <div className="max-w-[1280px] mx-auto px-6">
 
-        <PropertyImages />
-      </div>
+          {/* HEADER */}
+          <div className="mb-10">
+            <PropertyHeader mode="sell" />
+          </div>
+
+          {/* MAIN GRID (FIXED) */}
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-6 items-start">
+
+            {/* LEFT COLUMN */}
+            <div className="flex flex-col gap-6">
+              <PropertyAbout />
+              <PropertyImages />
+            </div>
+
+            {/* RIGHT COLUMN */}
+            <div>
+              <PropertyDetails />
+            </div>
+
+          </div>
+
+        </div>
+      </main>
 
       {/* FOOTER */}
       <Footer />

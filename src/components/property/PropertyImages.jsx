@@ -10,8 +10,8 @@ export default function PropertyImages() {
     <div
       className="
         w-full
-        max-w-[553px]
-        h-[654px]
+        max-w-[590px]
+        h-[550px]
         rounded-[15px]
         bg-[#1F3A5F]/10
         backdrop-blur-md

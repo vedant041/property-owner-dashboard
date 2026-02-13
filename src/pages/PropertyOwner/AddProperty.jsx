@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { MapPin } from "lucide-react";
 
 export default function AddProperty() {
+  const navigate = useNavigate();
 
   const [showToast, setShowToast] = useState(false);
 
@@ -42,6 +44,20 @@ export default function AddProperty() {
     minType: "Monthly",
 
     about: "",
+
+    // Industrial Fields
+    builtUp: "",
+    openArea: "",
+    industrialType: "",
+    ceilingHeight: "",
+    entryGateWidth: "",
+    truckAccess: "",
+    loadingDock: "",
+    fireSafety: "",
+    zoningType: "",
+    pollutionClearance: "",
+    powerLoad: "",
+
   });
 
 
@@ -68,6 +84,7 @@ export default function AddProperty() {
     }, 4000);
 
   }
+console.log("Selected Type:", form.type);
 
 
   /* ================= UI ================= */
@@ -162,7 +179,7 @@ export default function AddProperty() {
             name="type"
             value={form.type}
             onChange={handleChange}
-            options={["Residential", "Commercial"]}
+            options={["Residential", "Commercial", "Industrial"]}
           />
 
           <Select
@@ -310,6 +327,36 @@ export default function AddProperty() {
           />
 
         </div>
+
+
+        {/* ===== INDUSTRIAL SECTION ===== */}
+        {form.type === "Industrial" && (
+          <>
+            <h2 className="font-semibold my-6">Industrial Details</h2>
+
+            <div className="grid grid-cols-3 gap-4 mb-6">
+              <Input label="Built-up Area (sq ft)" name="builtUp" value={form.builtUp} onChange={handleChange} />
+              <Input label="Open Area (sq ft)" name="openArea" value={form.openArea} onChange={handleChange} />
+              <Select label="Industrial Type" name="industrialType" value={form.industrialType} onChange={handleChange} options={["Warehouse", "Factory"]} />
+            </div>
+
+            <h3 className="font-semibold mb-4">Infrastructure</h3>
+
+            <div className="grid grid-cols-3 gap-4 mb-6">
+              <Input label="Ceiling Height (ft)" name="ceilingHeight" value={form.ceilingHeight} onChange={handleChange} />
+              <Input label="Entry Gate Width (ft)" name="entryGateWidth" value={form.entryGateWidth} onChange={handleChange} />
+              <Select label="Truck Access" name="truckAccess" value={form.truckAccess} onChange={handleChange} options={["Yes", "No"]} />
+            </div>
+
+            <h3 className="font-semibold mb-4">Legal & Compliance</h3>
+
+            <div className="grid grid-cols-3 gap-4 mb-6">
+              <Select label="Zoning Type" name="zoningType" value={form.zoningType} onChange={handleChange} options={["Industrial", "Commercial"]} />
+              <Select label="Pollution Clearance" name="pollutionClearance" value={form.pollutionClearance} onChange={handleChange} options={["Approved", "Pending"]} />
+              <Input label="Power Load Capacity (kW)" name="powerLoad" value={form.powerLoad} onChange={handleChange} />
+            </div>
+          </>
+        )}
 
 
 

@@ -18,7 +18,7 @@ export default function Properties() {
 
     // Only open full form if Residential + Active
     if (data.type === "Residential" && data.status === "Active") {
-      navigate("/dashboard/add-property");
+      navigate("/add-property");
     }
   }
 

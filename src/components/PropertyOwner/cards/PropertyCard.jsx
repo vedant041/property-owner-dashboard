@@ -1,11 +1,14 @@
 import { MapPin, MoreVertical } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 /* ===============================
    PROPERTY CARD
 ================================ */
 
 export default function PropertyCard({ property }) {
+  const navigate = useNavigate();
+
   if (!property) return null;
 
   const {
@@ -202,6 +205,16 @@ export default function PropertyCard({ property }) {
           >
 
             <button
+              onClick={() => {
+                setOpenMenu(false);
+
+                // go to AddProperty page
+                navigate("/add-property");
+
+                // OPTIONAL (best practice)
+                // pass property data for editing
+                // navigate("/add-property", { state: { property } });
+              }}
               className="
                 w-full
                 px-4
@@ -236,6 +249,7 @@ export default function PropertyCard({ property }) {
             >
               Remove
             </button>
+
 
           </div>
 

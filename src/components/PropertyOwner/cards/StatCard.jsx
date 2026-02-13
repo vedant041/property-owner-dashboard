@@ -1,44 +1,49 @@
-export default function StatCard({ title, value, Icon }) {
+export default function StatCard({
+  title,
+  value,
+  Icon,
+  iconBg,
+  iconColor,
+}) {
   return (
     <div
       className="
-        flex
-        items-center
-        gap-4
+        flex items-center
+        gap-6
         px-6
         rounded-[9px]
-        backdrop-blur-md
+        backdrop-blur-xl
       "
       style={{
-        width: "262.5px",
+        width: "300px",
         height: "107px",
         background: "rgba(41,53,77,0.65)",
-        boxShadow: "0px 4px 4px rgba(0,0,0,0.25)",
         border: "1px solid rgba(255,255,255,0.15)",
+        boxShadow: "0px 4px 12px rgba(0,0,0,0.25)",
       }}
     >
-      {/* ICON */}
+      {/* ICON CIRCLE */}
       <div
         className="
-          w-12
-          h-12
+          w-[50px]
+          h-[50px]
           rounded-full
-          bg-[#1E4E8C]
-          flex
-          items-center
-          justify-center
+          flex items-center justify-center
         "
+        style={{
+          background: iconBg,
+        }}
       >
-        <Icon size={22} className="text-[#4FD1FF]" />
+        <Icon size={22} color={iconColor} />
       </div>
 
-      {/* TEXT */}
-      <div>
-        <p className="text-sm text-white/80">
+      {/* TEXT CONTENT */}
+      <div className="flex flex-col justify-center">
+        <p className="text-[14px] text-white/70 leading-none">
           {title}
         </p>
 
-        <p className="text-2xl font-semibold text-white leading-tight">
+        <p className="text-[24px] font-semibold text-white mt-1">
           {value}
         </p>
       </div>
