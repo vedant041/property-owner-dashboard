@@ -2,6 +2,7 @@ import { MapPin, MoreVertical } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+
 /* ===============================
    PROPERTY CARD
 ================================ */
@@ -58,7 +59,7 @@ export default function PropertyCard({ property }) {
         items-center
         gap-[24px]
         p-[16px]
-        rounded-[9px]
+        rounded-[9px]  
         backdrop-blur-md
         relative
       "
@@ -256,7 +257,12 @@ export default function PropertyCard({ property }) {
         )}
 
         {/* View Details */}
-        <button
+       <button
+          onClick={() =>
+            navigate("/property-details", {
+              state: property,
+            })
+          }
           className="
             bg-white/10
             hover:bg-white/20
@@ -269,6 +275,7 @@ export default function PropertyCard({ property }) {
         >
           View Details →
         </button>
+
 
       </div>
 

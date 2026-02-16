@@ -7,6 +7,7 @@ import AddProperty from "./pages/PropertyOwner/AddProperty";
 import Investors from "./pages/PropertyOwner/Investors";
 import InvestorProfile from "./pages/PropertyOwner/InvestorProfile";
 import InvestorInvestments from "./pages/PropertyOwner/InvestorInvestments";
+import PropertyDetails from "./pages/PropertyOwner/PropertyDetails";
 
 export default function AppDashboard() {
   return (
@@ -14,10 +15,15 @@ export default function AppDashboard() {
 
       {/* MAIN DASHBOARD ROOT */}
       <Route path="/" element={<OwnerLayout />}>
+
         <Route index element={<OwnerDashboard />} />
 
         <Route path="properties" element={<OwnerProperties />} />
         <Route path="add-property" element={<AddProperty />} />
+
+        {/* ⭐ MISSING ROUTE ADDED */}
+        <Route path="property-details" element={<PropertyDetails />} />
+
         <Route path="investors" element={<Investors />} />
 
         <Route path="investor/:id" element={<InvestorProfile />} />
@@ -25,6 +31,7 @@ export default function AppDashboard() {
           path="investor/:id/investments"
           element={<InvestorInvestments />}
         />
+
       </Route>
 
       {/* FALLBACK */}

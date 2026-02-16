@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import PropertyCard from "../../components/PropertyOwner/cards/PropertyCard";
 import { propertyList } from "../../data/propertyList";
@@ -7,26 +8,36 @@ import { propertyList } from "../../data/propertyList";
 import AddPropertyModal from "../../components/PropertyOwner/modals/AddPropertyModal";
 
 export default function Properties() {
+
+  /* ================= REDUX DATA ================= */
+  const properties = useSelector(
+    (state) => state.property.properties
+  );
+
   const navigate = useNavigate();
 
   const [showModal, setShowModal] = useState(false);
-  const [filter, setFilter] = useState("All"); // ✅ Added filter state
+  const [filter, setFilter] = useState("All");
 
-  /* AFTER MODAL SUBMIT */
+  /* ================= AFTER MODAL SUBMIT ================= */
+  // ⭐ FIXED (clean & correct)
   function handleAdd(data) {
     setShowModal(false);
 
-    // Only open full form if Residential + Active
-    if (data.type === "Residential" && data.status === "Active") {
-      navigate("/add-property");
-    }
+    // open form for ALL property types
+    navigate("/add-property", {
+      state: data,
+    });
   }
 
-  // ✅ Filter Logic
+  /* ================= MERGE STATIC + REDUX ================= */
+  const allProperties = [...propertyList, ...properties];
+
+  /* ================= FILTER LOGIC ================= */
   const filteredProperties =
     filter === "All"
-      ? propertyList
-      : propertyList.filter((item) => item.type === filter);
+      ? allProperties
+      : allProperties.filter((item) => item.type === filter);
 
   return (
     <div className="flex flex-col gap-6">
@@ -44,10 +55,10 @@ export default function Properties() {
           </p>
         </div>
 
-        {/* RIGHT */}
+        {/* RIGHT SIDE */}
         <div className="flex items-center gap-3">
 
-          {/* DROPDOWN */}
+          {/* FILTER DROPDOWN */}
           <select
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
@@ -66,9 +77,10 @@ export default function Properties() {
               text-white
             "
           >
+            <option value="" disabled hidden>
+              Property Type
+            </option>
 
-            <option value="" disabled hidden> Property Type </option>
-            {/* SHOW ALL */}
             <option value="All" className="bg-[#1B2B45] text-white">
               All
             </option>
@@ -84,11 +96,9 @@ export default function Properties() {
             <option value="Industrial" className="bg-[#1B2B45] text-white">
               Industrial
             </option>
-
           </select>
 
-
-          {/* ADD BUTTON */}
+          {/* ADD PROPERTY BUTTON */}
           <button
             onClick={() => setShowModal(true)}
             className="
@@ -107,14 +117,13 @@ export default function Properties() {
         </div>
       </div>
 
-
-      {/* LIST */}
+      {/* PROPERTY LIST */}
       <div className="flex flex-col gap-4">
 
         {filteredProperties.length > 0 ? (
-          filteredProperties.map((item) => (
+          filteredProperties.map((item, index) => (
             <PropertyCard
-              key={item.id}
+              key={item.id || index}
               property={item}
             />
           ))
@@ -126,8 +135,7 @@ export default function Properties() {
 
       </div>
 
-
-      {/* MODAL */}
+      {/* ADD PROPERTY MODAL */}
       {showModal && (
         <AddPropertyModal
           onClose={() => setShowModal(false)}

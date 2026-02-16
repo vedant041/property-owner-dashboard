@@ -15,5 +15,4 @@ const propertySlice = createSlice({
 });
 
 export const { addProperty } = propertySlice.actions;
-
 export default propertySlice.reducer;

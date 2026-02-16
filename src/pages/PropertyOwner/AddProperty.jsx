@@ -1,9 +1,30 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addProperty } from "../../redux/propertySlice"; 
 import { useNavigate } from "react-router-dom";
 import { MapPin } from "lucide-react";
+import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 
-export default function AddProperty() {
+
+export default function AddProperty({ onClose }) {
+  const getTitleByType = (type) => {
+  if (type === "Residential") return "2 BHK Apartment";
+  if (type === "Commercial") return "Retail Shop";
+  if (type === "Industrial") return "Warehouse";
+  return "Property";
+};
+
+  const location = useLocation();
+  const popupData = location.state || {};
+
+  const properties = useSelector(
+  (state) => state.property.properties
+);
+
+console.log("ALL PROPERTIES:", properties);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [showToast, setShowToast] = useState(false);
 
@@ -11,10 +32,11 @@ export default function AddProperty() {
 
   const [form, setForm] = useState({
 
-    title: "2 BHK Apartment",
+    title: getTitleByType(popupData.type || ""),
 
-    type: "",
-    status: "Active",
+    type: popupData.type || "",
+    status: popupData.status || "Active",
+
 
     price: "",
     location: "",
@@ -64,27 +86,90 @@ export default function AddProperty() {
   /* ================= HANDLERS ================= */
 
   function handleChange(e) {
+  const { name, value } = e.target;
+
+  setForm((prev) => ({
+    ...prev,
+    [name]: value,
+
+    // ⭐ AUTO TITLE LOGIC
+    title:
+      name === "type"
+        ? value === "Residential"
+          ? "2 BHK Apartment"
+          : value === "Commercial"
+          ? "Retail Shop"
+          : value === "Industrial"
+          ? "Warehouse"
+          : prev.title
+        : prev.title,
+  }));
+}
+
+
+
+   function handleSubmit(e) {
+  e.preventDefault();
+
+  dispatch(
+  addProperty({
+    id: Date.now(),
+
+    // BASIC
+    title: form.title || "Property",
+    type: form.type,
+    category:
+      form.type === "Residential"
+        ? "Apartment"
+        : form.type === "Commercial"
+        ? "Office"
+        : "Industrial",
+
+    location: form.location,
+
+    // IMAGE
+    image: "/2BHKimg1.png",
+
+    // PRICE
+    price: form.price || "0",
+    pricePerShare: form.pricePerShare || "0",
+
+    // RETURNS
+    expectedReturn: form.expectedReturn || "0",
+
+    // ⭐ FIXED VALUES (CARD NEEDS THESE)
+    sold: 0,
+    investors: 0,
+    invested: form.minInvestment || "0",
+    return: 0,
+
+    // AREA
+    area: form.area || "0",
+
+    // keep all original fields
+    ...form,
+  })
+);
+
+
+
+  setShowToast(true);
+
+  setTimeout(() => {
+    setShowToast(false);
+
+    // reset form (optional)
     setForm({
       ...form,
-      [e.target.name]: e.target.value,
+      price: "",
+      location: "",
+      landmark: "",
+      about: "",
     });
-  }
 
-
-  function handleSubmit(e) {
-
-    e.preventDefault();
-
-    console.log("Property Data :", form);
-
-    setShowToast(true);
-
-    setTimeout(() => {
-      setShowToast(false);
-    }, 4000);
-
-  }
-console.log("Selected Type:", form.type);
+    if (onClose) onClose(); // close popup
+  }, 800);
+}
 
 
   /* ================= UI ================= */
