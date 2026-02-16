@@ -4,13 +4,17 @@
   "version": "0.0.0",
   "type": "module",
       "scripts": {
-      "dev": "vite",
-      "dev:website": "cross-env VITE_APP_TYPE=website vite",
-      "dev:dashboard": "cross-env VITE_APP_TYPE=dashboard vite",
-      "build:website": "cross-env VITE_APP_TYPE=website vite build",
-      "build:dashboard": "cross-env VITE_APP_TYPE=dashboard vite build",
-      "preview": "vite preview"
-    },
+  "dev": "vite",
+  "dev:website": "cross-env VITE_APP_TYPE=website vite",
+  "dev:dashboard": "cross-env VITE_APP_TYPE=dashboard vite",
+
+  "build": "cross-env VITE_APP_TYPE=dashboard vite build",
+
+  "build:website": "cross-env VITE_APP_TYPE=website vite build",
+  "build:dashboard": "cross-env VITE_APP_TYPE=dashboard vite build",
+
+  "preview": "vite preview"
+},
   "dependencies": {
     "@iconify/react": "^6.0.2",
     "@reduxjs/toolkit": "^2.11.2",
