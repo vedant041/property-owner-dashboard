@@ -102,7 +102,7 @@ export default function PropertyDetails() {
             <Stat title="Price per share" value={`₹ ${property.pricePerShare}`} />
             <Stat title="Expected return" value={`${property.expectedReturn}%`} />
             <Stat title="Invested" value={`₹ ${property.invested}`} />
-            <Stat title="Return" value={`₹ ${property.return}`} />
+            <Stat title="Return" value={`₹ ${15000}`} />
             <Stat title="Investors" value={property.investors} />
 
           </div>

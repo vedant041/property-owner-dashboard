@@ -552,10 +552,10 @@ function StatusBadge({ status }) {
 
   const styles = {
 
-    Active: "bg-green-500/20 text-green-400",
-    Cancelled: "bg-red-500/20 text-red-400",
-    Matured: "bg-blue-500/20 text-blue-400",
-    Pending: "bg-orange-500/20 text-orange-400",
+    Active: "bg-green-500/20 w-[74px] h-[25px] text-green-400",
+    Cancelled: "bg-red-500/20 w-[74px] h-[25px] text-red-400",
+    Matured: "bg-blue-500/20 w-[74px] h-[25px] text-blue-400",
+    Pending: "bg-orange-500/20 w-[74px] h-[25px] text-orange-400",
 
   };
 
@@ -563,8 +563,8 @@ function StatusBadge({ status }) {
   return (
     <span
       className={`
-        px-3 py-1
-        rounded-full
+        px-3 py-1 w-[74px] h-[25px]
+        rounded-md
         text-xs
         ${styles[status]}
       `}
