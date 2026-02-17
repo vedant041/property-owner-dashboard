@@ -1,3 +1,4 @@
+
 export default function ProfilePopup({ onLogout }) {
   return (
     <div
@@ -25,7 +26,8 @@ export default function ProfilePopup({ onLogout }) {
       {/* ACTIONS */}
       <div className="p-2 space-y-1">
 
-        <button className="w-full text-left px-3 py-2 hover:bg-white/10 rounded">
+        <button 
+        className="w-full text-left px-3 py-2 hover:bg-white/10 rounded">
           Manage Profile
         </button>
 

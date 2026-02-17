@@ -1,7 +1,8 @@
 import { MapPin, MoreVertical } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { removeProperty } from "../../../redux/propertySlice";
 
 /* ===============================
    PROPERTY CARD
@@ -9,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function PropertyCard({ property }) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   if (!property) return null;
 

@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import PropertyCard from "../../components/PropertyOwner/cards/PropertyCard";
-import { propertyList } from "../../data/propertyList";
 
 import AddPropertyModal from "../../components/PropertyOwner/modals/AddPropertyModal";
 
@@ -31,7 +30,7 @@ export default function Properties() {
   }
 
   /* ================= MERGE STATIC + REDUX ================= */
-  const allProperties = [...propertyList, ...properties];
+const allProperties = properties;
 
   /* ================= FILTER LOGIC ================= */
   const filteredProperties =

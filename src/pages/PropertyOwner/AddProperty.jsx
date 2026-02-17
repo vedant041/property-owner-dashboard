@@ -108,57 +108,57 @@ console.log("ALL PROPERTIES:", properties);
 
 
 
-   function handleSubmit(e) {
+function handleSubmit(e) {
   e.preventDefault();
 
   dispatch(
-  addProperty({
-    id: Date.now(),
+    addProperty({
+      id: Date.now(),
 
-    // BASIC
-    title: form.title || "Property",
-    type: form.type,
-    category:
-      form.type === "Residential"
-        ? "Apartment"
-        : form.type === "Commercial"
-        ? "Office"
-        : "Industrial",
+      /* BASIC */
+      title: form.title || "Property",
+      type: form.type,
 
-    location: form.location,
+      category:
+        form.type === "Residential"
+          ? "Apartment"
+          : form.type === "Commercial"
+          ? "Office"
+          : "Warehouse",
 
-    // IMAGE
-    image: "/2BHKimg1.png",
+      location: form.location,
 
-    // PRICE
-    price: form.price || "0",
-    pricePerShare: form.pricePerShare || "0",
+      /* IMAGE */
+      image: "/2BHKimg1.png",
 
-    // RETURNS
-    expectedReturn: form.expectedReturn || "0",
+      /* PRICE */
+      price: form.price || "0",
+      pricePerShare: form.pricePerShare || "0",
 
-    // ⭐ FIXED VALUES (CARD NEEDS THESE)
-    sold: 0,
-    investors: 0,
-    invested: form.minInvestment || "0",
-    return: 0,
+      /* RETURNS */
+      expectedReturn: form.expectedReturn || "0",
 
-    // AREA
-    area: form.area || "0",
+      /* CARD REQUIRED FIELDS */
+      sold: 0,
+      investors: 0,
+      invested: form.minInvestment || "0",
 
-    // keep all original fields
-    ...form,
-  })
-);
+      // ⭐ IMPORTANT FIX
+      returnAmount: "0",
 
+      // ⭐ IMPORTANT FIX (PropertyCard uses size)
+      size: form.area ? `${form.area} sq. ft` : "0 sq. ft",
 
+      /* keep original form fields */
+      ...form,
+    })
+  );
 
   setShowToast(true);
 
   setTimeout(() => {
     setShowToast(false);
 
-    // reset form (optional)
     setForm({
       ...form,
       price: "",
@@ -167,9 +167,10 @@ console.log("ALL PROPERTIES:", properties);
       about: "",
     });
 
-    if (onClose) onClose(); // close popup
+    if (onClose) onClose();
   }, 800);
 }
+
 
 
   /* ================= UI ================= */

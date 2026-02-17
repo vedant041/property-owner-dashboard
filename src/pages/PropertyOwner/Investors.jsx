@@ -140,15 +140,23 @@ const investorData = [
 ================================ */
 
 export default function Investors() {
+  const [investors, setInvestors] = useState(investorData);
+
    const navigate = useNavigate(); 
   const [search, setSearch] = useState("");
   const [status, setStatus] = useState("");
   const [type, setType] = useState("");
 
+   function handleRemove(id) {
+      setInvestors((prev) =>
+        prev.filter((item) => item.id !== id)
+      );
+    }
+
 
   /* ================= FILTER ================= */
 
-  const filtered = investorData.filter((item) => {
+  const filtered = investors.filter((item) => {
 
     const matchSearch =
       item.name.toLowerCase().includes(search.toLowerCase());
@@ -158,6 +166,10 @@ export default function Investors() {
 
     const matchType =
       type === "" || item.type === type;
+
+    
+   
+
 
     return matchSearch && matchStatus && matchType;
 
@@ -302,7 +314,12 @@ export default function Investors() {
           {/* BODY */}
           {filtered.map((item) => (
 
-            <Row key={item.id} data={item}  navigate={navigate} />
+           <Row
+              key={item.id}
+              data={item}
+              navigate={navigate}
+              onRemove={handleRemove}
+            />
 
           ))}
 
@@ -345,7 +362,7 @@ export default function Investors() {
    ROW
 ================================ */
 
-function Row({ data, navigate }) {
+function Row({ data, navigate, onRemove}) {
 
   const [open, setOpen] = useState(false);
   const ref = useRef();
@@ -469,12 +486,12 @@ function Row({ data, navigate }) {
 
           <MenuItem
             text="Remove"
-            danger
             onClick={() => {
               setOpen(false);
-              console.log("Remove clicked");
+              onRemove(data.id);
             }}
           />
+
 
           <MenuItem
             text="View Profile"
