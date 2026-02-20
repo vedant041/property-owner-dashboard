@@ -505,11 +505,9 @@ function Row({ data, navigate, onRemove}) {
             text="See Investment"
             onClick={() => {
               setOpen(false);
-              navigate(`/investment/${data.id}`);
+              navigate(`/investor/${data.id}`);
             }}
           />
-
-
         </div>
       )}
 </div>

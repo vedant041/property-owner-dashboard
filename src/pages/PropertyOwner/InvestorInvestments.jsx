@@ -1,196 +1,272 @@
 import { Search, MapPin } from "lucide-react";
 
+/* ================= DATA ================= */
+
+const investmentData = [
+  {
+    id: 1,
+    image: "/2BHKimg1.png",
+    location: "Andheri East, Mumbai",
+    title: "2 BHK Apartment in Andheri East",
+    category: "Apartment",
+    size: "1200 sq. ft",
+    price: "1.60 Cr",
+    share: "2.5%",
+    holding: "Since Jan 2025",
+    invested: "12,000",
+    returnAmount: "15,000",
+    status: "Active",
+  },
+  {
+    id: 2,
+    image: "/2BHKimg1.png",
+    location: "Andheri East, Mumbai",
+    title: "2 BHK Apartment in Andheri East",
+    category: "Apartment",
+    size: "1200 sq. ft",
+    price: "1.60 Cr",
+    share: "2.5%",
+    holding: "Jan - Mar 2025",
+    invested: "12,000",
+    returnAmount: "15,500",
+    status: "Matured",
+  },
+  {
+    id: 3,
+    image: "/2BHKimg1.png",
+    location: "Andheri East, Mumbai",
+    title: "2 BHK Apartment in Andheri East",
+    category: "Apartment",
+    size: "1200 sq. ft",
+    price: "1.60 Cr",
+    share: "2.5%",
+    holding: "Jan - Mar 2025",
+    invested: "12,000",
+    returnAmount: "15,500",
+    status: "Sold Out",
+  },
+];
+
 export default function InvestorInvestments() {
+
   return (
     <div className="w-full flex justify-center py-8">
+
       <div className="w-[1122px] text-white">
 
-        {/* ================= TOP CARD ================= */}
+        {/* TOP CARD */}
         <div
           className="
-            w-full
+            w-[1122px]
+            h-[120px]
             rounded-[9px]
             border border-[#EEEEEE]/30
-            bg-[#29354D]/50
+            bg-[#29354D]/45
             backdrop-blur-md
-            px-6 py-5
-            flex justify-between items-center
+            px-[20px]
+            flex items-center justify-between
           "
         >
+
           {/* LEFT */}
-          <div className="flex gap-5 items-center">
-            <div className="w-[72px] h-[72px] rounded-full bg-cyan-500/20 flex items-center justify-center">
-              <div className="w-8 h-8 rounded-full bg-cyan-400" />
+          <div className="flex items-center gap-4">
+
+            <div className="w-[86px] h-[86px] rounded-full bg-cyan-500/20 flex items-center justify-center">
+              <div className="w-7 h-7 rounded-full bg-cyan-400" />
             </div>
 
             <div>
-              <h2 className="text-xl font-semibold">
+
+              {/* ↓ FIXED */}
+              <h2 className="text-[32px] font-semibold leading-none">
                 Nitya Varma
               </h2>
-              <p className="text-sm text-white/60 mt-1">
-                Joined on: <span className="text-white">12 Aug 2023</span>
-              </p>
+
+              {/* ↓ FIXED */}
+              <div className="flex gap-4 mt-2 text-[18px] text-white/70">
+
+                <span className="text-cyan-400 cursor-pointer">
+                  Profile
+                </span>
+
+                <p>
+                  Joined on:
+                  <span className="text-white ml-1">
+                    12 Aug 2023
+                  </span>
+                </p>
+
+                <p>
+                  Total Invested:
+                  <span className="text-white ml-1">
+                    ₹12,50,000
+                  </span>
+                </p>
+
+              </div>
+
             </div>
           </div>
 
           {/* RIGHT */}
           <div className="text-right">
-            <p className="text-sm text-white/60">
+
+            {/* ↓ FIXED */}
+            <p className="text-[22px] text-white/60">
               Current Portfolio Value
             </p>
-            <p className="text-2xl font-semibold mt-1">
+
+            {/* ↓ FIXED */}
+            <p className="text-[46px] font-semibold leading-none mt-1">
               ₹14,10,000
             </p>
           </div>
         </div>
 
-        {/* ================= HEADER ================= */}
-        <div className="flex justify-between items-center mt-8 mb-5">
-          <h3 className="text-lg font-semibold">
+
+        {/* HEADER */}
+        <div className="flex justify-between items-center mt-7 mb-4">
+
+          {/* ↓ FIXED */}
+          <h3 className="text-[38px] font-semibold">
             Invested Properties
           </h3>
 
-          <div className="flex gap-4">
-            {/* SEARCH */}
+          <div className="flex gap-3">
+
             <div className="relative">
-              <Search
-                size={16}
+              <Search size={14}
                 className="absolute left-3 top-2.5 text-white/50"
               />
               <input
                 placeholder="Search"
                 className="
-                  pl-9 pr-4 py-2
+                  pl-9 pr-3 py-2
+                  w-[200px]
                   rounded-lg
-                  bg-white/10
-                  border border-white/20
-                  text-sm
-                  outline-none
-                  w-[220px]
+                  bg-white/10 border border-white/20
+                  text-[14px] outline-none
                 "
               />
             </div>
 
-            {/* STATUS */}
-            <select
-              className="
-                px-4 py-2
-                rounded-lg
-                bg-white/10
-                border border-white/20
-                text-sm
-                outline-none
-                w-[140px]
-              "
-            >
+            <select className="
+              px-4 py-2 w-[130px]
+              rounded-lg
+              bg-white/10 border border-white/20
+              text-[14px]
+            ">
               <option>Status</option>
-              <option>Active</option>
-              <option>Matured</option>
-              <option>Sold Out</option>
             </select>
+
           </div>
         </div>
 
-        {/* ================= PROPERTY CARD ================= */}
-        {[1, 2, 3].map((item) => (
+        {/* CARDS */}
+        {investmentData.map((item) => (
+
           <div
-            key={item}
+            key={item.id}
             className="
-              w-full
+              h-[135px]
               rounded-[9px]
               border border-[#EEEEEE]/30
               bg-[#29354D]/50
               backdrop-blur-md
-              p-5
-              mb-5
-              flex justify-between items-center
+              px-5 mb-3
+              flex items-center justify-between
             "
           >
-            {/* LEFT SIDE */}
-            <div className="flex gap-5 items-center w-[50%]">
 
-              {/* IMAGE */}
+            {/* LEFT */}
+            <div className="flex gap-4 items-center w-[44%]">
+
               <img
-                src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"
+                src={item.image}
                 alt=""
-                className="w-[120px] h-[80px] rounded-lg object-cover"
+                className="w-[115px] h-[78px] rounded-md object-cover"
               />
 
-              {/* INFO */}
               <div>
-                <div className="flex items-center gap-2 text-xs text-cyan-400 mb-1">
-                  <MapPin size={12} />
-                  Andheri East, Mumbai
+
+                {/* ↓ FIXED */}
+                <div className="flex items-center gap-1 text-[10px] text-cyan-400">
+                  <MapPin size={10} />
+                  {item.location}
                 </div>
 
-                <p className="font-semibold">
-                  2 BHK Apartment in Andheri East
+                {/* ↓ FIXED */}
+                <p className="text-[16px] font-semibold leading-tight mt-1">
+                  {item.title}
                 </p>
 
-                <p className="text-sm text-white/60 mt-1">
-                  Apartment | 1200 sq. ft
+                {/* ↓ FIXED */}
+                <p className="text-[12px] text-white/60 mt-1">
+                  {item.category} | {item.size}
                 </p>
 
-                <p className="font-semibold mt-2">
-                  ₹ 1.60 Cr
+                {/* ↓ FIXED */}
+                <p className="text-[34px] font-semibold leading-none mt-1">
+                  ₹ {item.price}
                 </p>
               </div>
             </div>
 
-            {/* RIGHT SIDE */}
-            <div className="flex items-center gap-12">
+            {/* STATS */}
+            <div className="flex items-center gap-8">
 
-              <div>
-                <p className="text-xs text-white/60">Share</p>
-                <p className="font-semibold mt-1">2.5%</p>
-              </div>
+              <Stat label="Share" value={item.share} />
+              <Stat label="Holding" value={item.holding} />
+              <Stat label="Invested" value={`₹${item.invested}`} />
+              <Stat label="Return" value={`₹${item.returnAmount}`} />
 
-              <div>
-                <p className="text-xs text-white/60">Holding</p>
-                <p className="font-semibold mt-1">
-                  Since Jan 2025
-                </p>
-              </div>
-
-              <div>
-                <p className="text-xs text-white/60">Return</p>
-                <p className="font-semibold mt-1">
-                  ₹15,000
-                </p>
-              </div>
-
-              {/* STATUS */}
               <span
                 className="
-                  px-4 py-1
-                  rounded-full
-                  text-xs
-                  bg-green-500/20
-                  text-green-400
+                  px-3 py-[3px]
+                  rounded-md text-[10px]
+                  bg-green-500/20 text-green-400
                 "
               >
-                Active
+                {item.status}
               </span>
 
-              {/* BUTTON */}
               <button
                 className="
-                  px-4 py-2
-                  rounded-lg
+                  w-[92px]
+                  h-[44px]
+                  rounded-[9px]
                   bg-white/10
                   border border-white/20
-                  text-sm
-                  hover:bg-white/20
+                  text-[12px]
+                  font-medium
+                  flex items-center justify-center
                 "
               >
                 View Property →
               </button>
 
             </div>
+
           </div>
+
         ))}
 
       </div>
+    </div>
+  );
+}
+
+/* STAT */
+function Stat({ label, value }) {
+  return (
+    <div>
+      {/* ↓ FIXED */}
+      <p className="text-[11px] text-white/60">{label}</p>
+
+      {/* ↓ FIXED */}
+      <p className="text-[26px] font-semibold leading-none mt-1">
+        {value}
+      </p>
     </div>
   );
 }
